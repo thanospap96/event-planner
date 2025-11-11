@@ -19,16 +19,11 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET!) as AuthPayload;
-
         if (!decoded.userId || !decoded.email) {
             return res.status(400).json({ message: "Invalid token" });
         }
         req.user = decoded;
-        // req.user = {
-        //     userId: decoded.userId,
-        //     email: decoded.email,
-        //     isAdmin: decoded.isAdmin,
-        // }
+
         next();
     } catch (err) {
         return res.status(401).json({ message: "Invalid or expired token" });
