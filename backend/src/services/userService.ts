@@ -34,3 +34,8 @@ export const findOneByEmail = async (email: string): Promise<UserResponse | null
         isAdmin: user.isAdmin,
     };
 };
+
+export const deleteById = async (id: string): Promise<Boolean> => {
+    const deleted = await User.findByIdAndDelete(id)
+    return !!deleted;
+}
