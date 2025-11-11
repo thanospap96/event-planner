@@ -5,12 +5,12 @@ import { RegisterData, LoginData, AuthPayload, RegisterResponse, LoginResponse} 
 
 export const registerUser = async (data: RegisterData): Promise<RegisterResponse> => {
     const { username, email, password } = data;
-
-    const existing = await User.findOne({ email });
+    const emailForm = data.email.trim().toLowerCase();
+    const existing = await User.findOne({ email: emailForm });
     if (existing) throw new Error ("User already exists");
 
     const hashedPassword = await bcrypt.hash(password, 12);
-    const newUser = new User({username, email, password: hashedPassword});
+    const newUser = new User({username, email: emailForm, password: hashedPassword});
     await newUser.save();
 
     const payload: AuthPayload = {
@@ -38,8 +38,8 @@ export const loginUser = async (data: LoginData): Promise<LoginResponse> => {
         email: user.email,
         isAdmin: user.isAdmin,
     };
-
     const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: "1d"});
+
     return {message: "Successfully login!", user: payload, token}
 
 }
