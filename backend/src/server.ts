@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/authRoutes';
 import userRoutes from './routes/userRoutes';
 import {setupSwagger} from "./docs/swagger";
+import eventsRoutes from "./routes/eventsRoutes";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ setupSwagger(app)
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/events", eventsRoutes)
 
 
 app.get("/api/health", (_req, res) => res.json({ ok: true }));
