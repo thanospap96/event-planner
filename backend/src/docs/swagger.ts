@@ -92,18 +92,6 @@ export const setupSwagger = (app: Express) => {
                             isAttending: { type: "boolean" },
                         },
                     },
-                    PaginatedEvents: {
-                        type: "object",
-                        properties: {
-                            items: {
-                                type: "array",
-                                items: {$ref: "#/components/schemas/EventResponse"},
-                            },
-                            total: {type: "integer", example: 1},
-                            page: {type: "integer", example: 1},
-                            limit: {type: "integer", example: 10},
-                        },
-                    },
                 },
             },
         },
