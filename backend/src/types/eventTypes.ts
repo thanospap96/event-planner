@@ -15,6 +15,7 @@ export interface CreateEventData {
     date: string;
     location?: string;
     capacity?: number;
+
 }
 
 export interface UpdateEventData {
