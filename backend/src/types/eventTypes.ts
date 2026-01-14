@@ -7,6 +7,8 @@ export interface EventResponse {
     capacity?: number;
     createdBy: string;
     attendees: string[];
+    attendeesCount: number;
+    isAttending?: boolean;
 }
 
 export interface CreateEventData {

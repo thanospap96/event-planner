@@ -76,7 +76,7 @@ export const setupSwagger = (app: Express) => {
                     },
                     EventUpdateRequest: {
                         allOf: [{ $ref: "#/components/schemas/EventRequest" }],
-                        required: [], // όλα optional στο update
+                        required: [], 
                     },
                     EventResponse: {
                         type: "object",

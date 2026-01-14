@@ -84,7 +84,7 @@ router.get("/:username", authenticate, validate(usernameParamSchema), getUserByU
  * @openapi
  * /api/users/{id}:
  *   delete:
- *     summary: Delete user (admin only)
+ *     summary: Delete user ()
  *     tags: [Users]
  *     security: [{ bearerAuth: [] }]
  *     parameters:
@@ -99,5 +99,5 @@ router.get("/:username", authenticate, validate(usernameParamSchema), getUserByU
  *       404: { description: User not found }
  */
 
-router.delete("/:id", authenticate, verifyAdmin, validate(idParamSchema), deleteUser);
+router.delete("/:id", authenticate, /*verifyAdmin*/validate(idParamSchema), deleteUser);
 export default router;
