@@ -38,10 +38,3 @@ export type EventResponse = {
     attendeesCount: number;
     isAttending?: boolean;
 };
-
-// export type PaginatedEvents = {
-//     items: EventResponse[];
-//     total: number;
-//     page: number;
-//     limit: number;
-// };

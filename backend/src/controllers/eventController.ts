@@ -6,7 +6,7 @@ import { CreateEventData, UpdateEventData} from "../types/eventTypes";
 
 export const getEvents = async (req: AuthRequest, res: Response) => {
     try {
-        const events = await eventService.listEvents();
+        const events = await eventService.listEvents(req.user?.userId);
         res.status(200).json(events);
     } catch (err: any) {
         res.status(500).json({ message: err.message });
@@ -15,7 +15,7 @@ export const getEvents = async (req: AuthRequest, res: Response) => {
 
 export const getEventById = async (req: AuthRequest, res: Response) => {
     try {
-        const event = await eventService.getEventById(req.params.id);
+        const event = await eventService.getEventById(req.params.id, req.user?.userId);
         if(!event) return res.status(404).json({message: "Event not found"});
         res.status(200).json(event);
     } catch (err: any) {
@@ -37,7 +37,7 @@ export const createEvent = async (req: AuthRequest, res: Response) => {
 export const updateEvent = async (req: EventRequest, res: Response) => {
     try {
         const data = req.body as UpdateEventData;
-        const event = await eventService.updateEventById(req.params.id, data);
+        const event = await eventService.updateEventById(req.params.id, data, req.user?.userId);
         if (!event) return res.status(404).json({message: "Event not found"});
         res.status(200).json(event);
     } catch (err: any) {
