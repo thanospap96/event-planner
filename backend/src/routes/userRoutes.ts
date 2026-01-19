@@ -99,5 +99,5 @@ router.get("/:username", authenticate, validate(usernameParamSchema), getUserByU
  *       404: { description: User not found }
  */
 
-router.delete("/:id", authenticate, /*verifyAdmin*/validate(idParamSchema), deleteUser);
+router.delete("/:id", authenticate, validate(idParamSchema), deleteUser);
 export default router;
