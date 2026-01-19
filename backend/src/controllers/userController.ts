@@ -44,6 +44,22 @@ export const getUserByEmail = async (req: AuthRequest, res: Response): Promise<v
 export const deleteUser = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
+
+        if (!req.user) {
+            res.status(401).json({message: "Unauthorized"});
+            return;
+        }
+
+        const requesterId = req.user?.userId;
+        const requesterIsAdmin = !!req.user?.isAdmin;
+
+        const selfDelete = requesterId === id;
+
+        if (!requesterIsAdmin && !selfDelete) {
+            res.status(403).json({message: "You can only delete your self!"});
+            return;
+        }
+
         const ok = await userService.deleteById(id);
         if (!ok) { res.status(404).json({ message: "User not found" }); return; }
         res.status(200).json( {message: "User deleted" });
