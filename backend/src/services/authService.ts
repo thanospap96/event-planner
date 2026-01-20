@@ -1,4 +1,4 @@
-import User, {IUser} from '../models/User'
+import User from '../models/User'
 import bcrypt from 'bcryptjs';
 import jwt = require('jsonwebtoken');
 import { RegisterData, LoginData, AuthPayload, RegisterResponse, LoginResponse}  from "../types/authTypes";
@@ -6,8 +6,13 @@ import { RegisterData, LoginData, AuthPayload, RegisterResponse, LoginResponse} 
 export const registerUser = async (data: RegisterData): Promise<RegisterResponse> => {
     const { username, email, password } = data;
     const emailForm = data.email.trim().toLowerCase();
-    const existing = await User.findOne({ email: emailForm });
-    if (existing) throw new Error ("User already exists");
+
+    const existingEmail = await User.findOne({ email: emailForm });
+    if (existingEmail) throw new Error ("Email already exists");
+
+    const existingUsername= await User.findOne({ username })
+    if (existingUsername) throw new Error ("Username already in use")
+
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({username, email: emailForm, password: hashedPassword});
@@ -27,7 +32,8 @@ export const registerUser = async (data: RegisterData): Promise<RegisterResponse
 export const loginUser = async (data: LoginData): Promise<LoginResponse> => {
     const { email, password } = data;
 
-    const user = (await User.findOne({ email }));
+    const emailForm = email.trim().toLowerCase();
+    const user = await User.findOne({ email: emailForm });
     if (!user) throw new Error("User not found");
 
     const valid = await bcrypt.compare(password, user.password);
