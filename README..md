@@ -1,73 +1,229 @@
-# React + TypeScript + Vite
+## Event Planner
+This project was created for the certification of the Coding Factory program at the Athens University of Economics and Business (AUEB).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Technologies
+- **Backend:** Node.js, TypeScript, Express, MongoDB (Mongoose)
+- **Frontend:** React, TypeScript, Vite, Tailwind CSS
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Build & Deploy (Local)
 
-## React Compiler
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm
+- MongoDB (local) or MongoDB Atlas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Backend (API)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Environment variables
+Create `backend/.env` based on `backend/.env.example`: 
+PORT=5000, 
+MONGO_URI=YOUR_MONGO_URI_HERE, 
+JWT_SECRET=YOUR_JWT_SECRET_HERE.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Install & Run
+Backend install: `cd backend` then `npm install`.
+Development: `npm run dev`. 
+Production: `npm run build` then `npm start`. 
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Backend runs on: `http://localhost:5000`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Frontend (React)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Environment variables
+Create `frontend/.env` based on `frontend/.env.example`: 
+VITE_API_URL=http://localhost:5000/api.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Install & Run
+Frontend install: `cd frontend` then `npm install`. 
+Development: `npm run dev`. 
+Production: `npm run build` then `npm run preview`.
+
+Frontend dev usually runs on: `http://localhost:5173`. 
+Preview usually runs on: `http://localhost:4173`.
+
+---
+
+## API Documentation (Swagger)
+Swagger UI is available for testing the API endpoints. Start the backend and open: `http://localhost:5000/api-docs`.
+
+### Admin-only CRUD endpoints
+Some user-management endpoints (admin CRUD) are not exposed in the UI. To test them via Swagger: 
+(1) Log in as an admin user (`/api/auth/login`), 
+(2) Copy the returned JWT token, 
+(3) Click **Authorize** in Swagger and paste `Bearer <your_token>`,
+(4) Test the admin endpoints (e.g. user list/search/delete).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[//]: # (## Event Planner)
+
+[//]: # ()
+[//]: # (This project was created for the certification of the Coding Factory program at the Athens University of Economics and Business &#40;AUEB&#41;.)
+
+[//]: # ()
+[//]: # (### Technologies)
+
+[//]: # (- **Backend:** Node.js, TypeScript, Express, MongoDB &#40;Mongoose&#41;)
+
+[//]: # (- **Frontend:** React, TypeScript, Vite, Tailwind CSS)
+
+[//]: # ()
+[//]: # (---)
+
+[//]: # ()
+[//]: # (## Build & Deploy &#40;Local&#41;)
+
+[//]: # ()
+[//]: # (### Prerequisites)
+
+[//]: # (- Node.js &#40;v18+ recommended&#41;)
+
+[//]: # (- npm)
+
+[//]: # (- MongoDB &#40;local&#41; or MongoDB Atlas)
+
+[//]: # ()
+[//]: # (---)
+
+[//]: # ()
+[//]: # (## Backend &#40;API&#41;)
+
+[//]: # ()
+[//]: # (### Environment variables)
+
+[//]: # (Create `backend/.env` based on `backend/.env.example`:)
+
+[//]: # ()
+[//]: # (PORT=5000)
+
+[//]: # (MONGO_URI=)
+
+[//]: # (JWT_SECRET=)
+
+[//]: # ()
+[//]: # ()
+[//]: # (### Install & Run)
+
+[//]: # (```bash```)
+
+[//]: # (cd backend)
+
+[//]: # (npm install)
+
+[//]: # ()
+[//]: # ()
+[//]: # (### ###Development)
+
+[//]: # ()
+[//]: # (npm run dev)
+
+[//]: # ()
+[//]: # (Production &#40;build & start&#41;)
+
+[//]: # ()
+[//]: # (npm run build)
+
+[//]: # (npm start)
+
+[//]: # ()
+[//]: # ()
+[//]: # (Backend runs on: http://localhost:5000)
+
+[//]: # ()
+[//]: # ()
+[//]: # (### ###Frontend &#40;React&#41;)
+
+[//]: # ()
+[//]: # (Environment variables)
+
+[//]: # ()
+[//]: # (Create frontend/.env based on frontend/.env.example:)
+
+[//]: # ()
+[//]: # (VITE_API_URL=http://localhost:5000/api)
+
+[//]: # ()
+[//]: # (Install & Run)
+
+[//]: # (```bash```)
+
+[//]: # (cd frontend)
+
+[//]: # (npm install)
+
+[//]: # ()
+[//]: # ()
+[//]: # (Development)
+
+[//]: # ()
+[//]: # (npm run dev)
+
+[//]: # ()
+[//]: # ()
+[//]: # (Production build &#40;preview&#41;)
+
+[//]: # ()
+[//]: # (npm run build)
+
+[//]: # (npm run preview)
+
+[//]: # ()
+[//]: # ()
+[//]: # (Frontend:)
+
+[//]: # ()
+[//]: # (Dev usually runs on: http://localhost:5173)
+
+[//]: # ()
+[//]: # (Preview usually runs on: http://localhost:4173)
+
+[//]: # ()
+[//]: # (API Documentation &#40;Swagger&#41;)
+
+[//]: # ()
+[//]: # (Swagger UI is available for testing the API endpoints.)
+
+[//]: # ()
+[//]: # (Start the backend)
+
+[//]: # ()
+[//]: # (Open: http://localhost:5000/api-docs)
+
+[//]: # ()
+[//]: # (Admin-only CRUD endpoints)
+
+[//]: # ()
+[//]: # (Some user-management endpoints &#40;admin CRUD&#41; are not exposed in the UI.)
+
+[//]: # (To test them via Swagger:)
+
+[//]: # ()
+[//]: # (Log in as an admin user &#40;/api/auth/login&#41;)
+
+[//]: # ()
+[//]: # (Copy the returned JWT token)
+
+[//]: # ()
+[//]: # (Click Authorize in Swagger and paste:)
+
+[//]: # (Bearer <your_token>)
+
+[//]: # ()
+[//]: # (Test the admin endpoints &#40;e.g. user list/search/delete&#41;.)
