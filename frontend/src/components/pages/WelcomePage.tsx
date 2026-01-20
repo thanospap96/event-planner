@@ -51,7 +51,7 @@ export default function WelcomePage() {
                 </div>
 
                 <div className="mt-6">
-                    {mode === "login" ? <Login /> : <Register onSuccess={() => setMode("login")} />}
+                    {mode === "login" ? <Login /> : <Register/>}
                 </div>
             </div>
         </div>
