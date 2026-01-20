@@ -12,6 +12,7 @@ type AuthState = {
     logout: () => void;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext<AuthState>({} as AuthState);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -58,4 +59,5 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);
