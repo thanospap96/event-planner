@@ -1,6 +1,7 @@
 import {useAuth} from "../../context/AuthContext.tsx";
 import {useForm} from "react-hook-form";
 import toast from "react-hot-toast";
+import {useNavigate} from "react-router-dom";
 
 type RegisterForm = {
     username: string;
@@ -8,19 +9,19 @@ type RegisterForm = {
     email: string;
 }
 
-interface RegisterProps {
-    onSuccess?: () => void;
-}
 
-export function Register({ onSuccess }: RegisterProps) {
+
+export function Register() {
     const { register: registerField, handleSubmit} = useForm<RegisterForm>();
     const { register } = useAuth();
+    const nav = useNavigate();
 
     const onSubmit = async (values: RegisterForm) => {
         try {
             await register(values.username, values.email, values.password);
             toast.success("Registration successful! Please login.");
-            onSuccess?.();
+            nav("/events", { replace: true });
+
         } catch (err: any) {
             const errorMessage = err?.response?.data?.message || err?.message || "Registration failed";
             
